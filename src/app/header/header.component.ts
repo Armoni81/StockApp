@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StockDataService } from '../stockService/stock-data.service';
 import { StockDetails } from '../models/stock-details';
 import { filter } from 'rxjs';
+import { get } from 'http';
 
 @Component({
   selector: 'app-header',
@@ -29,8 +30,14 @@ export class HeaderComponent {
   //   })
   // }
   this.stockService.getstockData(this.userInput).subscribe((data: any) => {
+    console.log(data)
     const filterResponse = data.filter((obj: { Exchange: string; }) => obj.Exchange === "US" );
-    console.log(filterResponse, 'res')
+    const getTickersForVolAndChange = filterResponse.map((val: {Code:string}) => val.Code)
+    const metaData = this.stockService.getVolAndChangeData(getTickersForVolAndChange)
+
+    
+    console.log(filterResponse, 'filterresponse')
+    console.log(metaData, 'metaData')
     this.stockDetails = []
 
     if(filterResponse.length >= 1){
@@ -45,7 +52,8 @@ export class HeaderComponent {
          }
   
          this.stockDetails.push(details)
-      }
+        }
+        console.log('tick')
 
     }
 
@@ -58,6 +66,11 @@ export class HeaderComponent {
      }
 
      this.stockDetails.push(details)
+     for( let obj of filterResponse){
+        console.log(obj, 'need YOO??')
+     }
+    
   });
 }
+
 }
