@@ -1,33 +1,60 @@
-<div> 
-    <div>
-        <h1 style="margin-right: 5px;">Stock Exchange App</h1>
-        <div class="mb-3 m-0 form-floating mb-3" style="display: flex">
-             <!-- <input type="text" [(ngModel)]="userInput" class="form-control" id="exampleInput" placeholder="Enter text" style="margin-right: 5px;"> -->
-             <input [(ngModel)]="userInput" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="margin-right: 5px;">
-             <label for="floatingInput">Stock</label>
-             <button class="btn btn-outline-secondary bi bi-calendar3" type="button" (click)="test()">Submit</button>
-         </div>
-         <p> You entered: {{ userInput }} </p>
-         <h3> Search Results ({{stockDetails.length}})</h3>
-         <div class="container">
-            <div class="row">
-              <div *ngFor="let stock of stockDetails" class="col-12 col-sm-6 col-lg-4 mb-3">
-                <div class="card p-3">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <h5 class="card-title">{{ stock.ticker }}</h5>
-                      <h6 class="card-text">{{ stock.prevClose }}</h6>
-                    </div>
-                    <small class="card-text text-body-secondary">{{ stock.company }}</small>
-                    <h6 class="card-text mt-3">{{ stock.lastCloseDate }}</h6>
-                    <a href="#" class="btn btn-primary mt-3">Go somewhere</a>
+<div class="container-fluid">
+    <!-- Row for sidebar and content -->
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <app-sidebar></app-sidebar>
+      </div>
+      
+      <!-- Main content (header and stock exchange content) -->
+      <div class="col p-4">
+        <!-- Header (e.g., Stock Exchange App title and other content) -->
+        <app-header></app-header>
+        <!-- Content -->
+        <div>
+          <h1 class="mb-3">Stock Exchange App</h1>
+          
+          <div class="mb-3 form-floating d-flex">
+            <!-- Input for stock -->
+            <input [(ngModel)]="userInput" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Stock</label>
+            <button class="btn btn-outline-secondary bi bi-calendar3 ms-2" type="button" (click)="test()">Submit</button>
+          </div>
+          
+          <p>You entered: {{ userInput }}</p>
+          <h3 *ngIf="!displayStockCount">Popular Stocks</h3>
+          <h3 *ngIf="displayStockCount">Search Results ({{ stockDetails.length }})</h3>
+          
+          <div class="row">
+            <!-- Loop over stock details -->
+            <div *ngFor="let stock of stockDetails" class="col-12 col-sm-6 col-lg-4 mb-3">
+              <div class="card p-3">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="card-title">{{ stock.ticker }}
+                      <small style="font-size: 0.55em;" class="text-muted">Ticker</small>
+                    </h5>
+                    <h6 class="card-text">${{ stock.prevClose }}
+                      <small style="font-size: 0.55em;" class="text-muted">Close</small>
+                    </h6>
                   </div>
+                  <small class="card-text text-body-secondary">{{ stock.company }}</small>
+                  <h6 class="card-text mt-3">{{ stock.lastCloseDate }}</h6>
+                 
+                  <p *ngIf="stock.changePrice.includes('-')" class="text-danger">
+                    {{ stock.changePrice }}
+                    <i class="bi bi-arrow-down"></i>
+                  </p>
+                  <p *ngIf="!stock.changePrice.includes('-')" class="text-success">
+                    {{ stock.changePrice }}
+                  </p>
+                  <a href="#" class="btn btn-primary mt-3">Go somewhere</a>
                 </div>
               </div>
             </div>
           </div>
-          
-       
-    </div>    
- </div>
- 
+        </div>
+      </div>
+    </div>
+  </div>
+  

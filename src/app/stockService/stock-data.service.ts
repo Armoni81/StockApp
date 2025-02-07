@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { StockDetails } from '../models/stock-details';
 @Injectable({
   providedIn: 'root'
 })
 export class StockDataService {
 
   constructor(private http:HttpClient) { }
+  popularStocks: StockDetails[] = []
 
   getstockData(input:string){
    return this.http.get<any[]>(`https://eodhd.com/api/search/${input}?api_token=67a12da01ba898.08534747&fmt=json`)
@@ -36,4 +37,29 @@ export class StockDataService {
     return dataObj
 }
 
+getPopularStocks(){
+const popularStocks = ['TSLA','AAPL', 'SPY', 'GOOG', 'AMZN', 'GME', 'MSFT']
+const stockNames = ['Tesla', 'Apple', 'S&P 500', 'Google', 'Amazon', 'Microsoft']
+
+for(let i = 0; i < popularStocks.length; i++){
+  this.http.get<{c:number | string, d:number}>(`https://finnhub.io/api/v1/quote?symbol=${popularStocks[i]}&token=cu88dlpr01qhqu5ccfk0cu88dlpr01qhqu5ccfkg`).subscribe((data) => {
+    if(data){
+      console.log(data)
+      let details: StockDetails = {
+        ticker:popularStocks[i],
+        company: stockNames[i],
+        typeStock:'null',
+        prevClose: data.c,
+        lastCloseDate: '1/2/2022',
+        changePrice: data.d.toString()
+      }
+      this.popularStocks.push(details)
+    }
+    
+  })
+
 }
+return this.popularStocks
+}
+}
+

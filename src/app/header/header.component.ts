@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { StockDataService } from '../stockService/stock-data.service';
 import { StockDetails } from '../models/stock-details';
-import { filter } from 'rxjs';
-import { get } from 'http';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +9,19 @@ import { get } from 'http';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+
+
   userInput: string = ''
   stockDetails:StockDetails[] = []
+  displayStockCount:boolean = false
   constructor( private stockService:StockDataService ){}
+  ngOnInit(): void {
+    this.stockDetails = this.stockService.getPopularStocks()
+  }
 
   test(){
+    this.displayStockCount  = true
     // console.log(this.stockService.getstockData())
     console.log('hi click')
     console.log(this.userInput, 'input')
@@ -95,7 +101,8 @@ export class HeaderComponent {
           company: filterResponse[i].Name,
           typeStock:filterResponse[i].Type,
           prevClose: filterResponse[i].previousClose,
-          lastCloseDate: filterResponse[i].previousCloseDate
+          lastCloseDate: filterResponse[i].previousCloseDate,
+          changePrice: 0
          }
   
          this.stockDetails.push(details)
@@ -116,7 +123,8 @@ export class HeaderComponent {
       company: filterResponse[0].Name,
       typeStock: filterResponse[0].Type,
       prevClose: filterResponse[0].previousClose,
-      lastCloseDate: filterResponse[0].previousCloseDate
+      lastCloseDate: filterResponse[0].previousCloseDate,
+      changePrice: 0
      }
 
      this.stockDetails.push(details)
