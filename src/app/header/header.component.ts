@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   constructor( private stockService:StockDataService ){}
   ngOnInit(): any {
     this.stockDetails = this.stockService.getPopularStocks()
+    console.log(this.stockDetails, 'dets')
   }
 
    test()  {

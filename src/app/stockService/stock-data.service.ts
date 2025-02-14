@@ -8,7 +8,8 @@ import { firstValueFrom } from 'rxjs'; //use this instead of toPromise() as it i
 export class StockDataService {
 
   constructor(private http:HttpClient) { }
-  popularStocks: StockDetails[] = []
+  popularStocksData: StockDetails[] = []
+
 
   getstockData(input:string){
    return this.http.get<any[]>(`https://eodhd.com/api/search/${input}?api_token=67a12da01ba898.08534747&fmt=json`)
@@ -41,37 +42,38 @@ export class StockDataService {
   
   
 
-getPopularStocks(){
-const popularStocks = ['TSLA','AAPL', 'SPY', 'GOOG', 'AMZN', 'GME', 'MSFT']
-const stockNames = ['Tesla', 'Apple', 'S&P 500', 'Google', 'Amazon', 'Microsoft']
+  getPopularStocks() {
+    const popularStocks = ['TSLA', 'AAPL', 'SPY', 'GOOG', 'AMZN', 'GME', 'MSFT'];
+    const stockNames = ['Tesla', 'Apple', 'S&P 500', 'Google', 'Amazon', 'Microsoft'];
+  
+    this.popularStocksData = []; // Reset before fetching new data
+  
+    for (let i = 0; i < popularStocks.length; i++) {
+      this.http
+        .get<{ c: number | string; d: number }>(
+          `https://finnhub.io/api/v1/quote?symbol=${popularStocks[i]}&token=cu88dlpr01qhqu5ccfk0cu88dlpr01qhqu5ccfkg`
+        )
+        .subscribe({
+          next: (data) => {
+            if (data) {
+              let details: StockDetails = {
+                ticker: popularStocks[i],
+                company: stockNames[i] || popularStocks[i], // Fallback if undefined
+                typeStock: 'null',
+                prevClose: data.c,
+                lastCloseDate: '1/2/2022',
+                changePrice: data.d.toString(),
+              };
+              this.popularStocksData.push(details); // Update array
+              console.log(`Added: ${details.ticker}`, this.popularStocksData);
 
-for(let i = 0; i < popularStocks.length; i++){
-  this.http.get<{c:number | string, d:number}>(`https://api.marketstack.com/v1/eod?access_key=4f7e5853443aa75d9fecf37e47d07727&symbols=${popularStocks[i]}`).subscribe({
-    //stopped here, need to find anothe api call for popular stocks
-    next: ( data) => { 
-      console.log(data, 'OMAHHH')
-      if(data){
-        console.log(data)
-        let details: StockDetails = {
-          ticker:popularStocks[i],
-          company: stockNames[i],
-          typeStock:'null',
-          prevClose: data.c,
-          lastCloseDate: '1/2/2022',
-          changePrice: data.d
-        }
-        this.popularStocks.push(details)
-      }
-      
-      return this.popularStocks
-  
-  
-  },
-  error: (error) => {
-    console.error(error, 'Armoni')
-    return false
+            }
+          },
+          error: (error) => {
+            console.error(`Error fetching ${popularStocks[i]}:`, error);
+          },
+        });
+    }
+    return this.popularStocksData
   }
-  })
-
 }
-}}
