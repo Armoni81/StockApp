@@ -4,7 +4,9 @@ import { StockDetails } from '../models/stock-details';
 import { OnInit } from '@angular/core';
 import { filter } from 'rxjs';
 
+// import * as bootstrap from 'bootstrap';
 
+declare var bootstrap: any; 
 @Component({
   selector: 'app-header',
   standalone: false,
@@ -20,8 +22,10 @@ export class HeaderComponent implements OnInit {
   constructor( private stockService:StockDataService ){}
   ngOnInit(): any {
     this.stockDetails = this.stockService.getPopularStocks()
-    console.log(this.stockDetails, 'dets')
-  }
+    
+}
+
+
 
    test()  {
     this.displayStockCount  = true
@@ -33,19 +37,19 @@ export class HeaderComponent implements OnInit {
     this.stockDetails = []
    const getTickersForVolAndChange = filterResponse.map((val: {Code:string}) => val.Code)
    const changePrice = await  this.stockService.getVolAndChangeData(getTickersForVolAndChange)
+   console.log(typeof changePrice[0], 'yo')
    if(filterResponse.length >= 1){
      for(let i = 0; i <= filterResponse.length ; i++){
-       console.log(i,'i')
-       // this.stockService.getVolAndChangeData(getTickersForVolAndChange)
+      let toNum = parseFloat(changePrice[i]).toFixed(2)
        let details: StockDetails = {
          ticker: filterResponse[i].Code,
-         company: filterResponse[i].Name,
+         company: filterResponse[i].Name.length >= 30 ? `${filterResponse[i].Name.substring(0,30)}...`: filterResponse[i].Name,
          typeStock:filterResponse[i].Type,
          prevClose: filterResponse[i].previousClose,
          lastCloseDate: filterResponse[i].previousCloseDate,
-         changePrice: changePrice[i].toFixed(2)
+         changePrice: toNum.toString()
         }
-        console.log(details, 'detail')
+
         this.stockDetails.push(details)
        }
      }

@@ -21,13 +21,14 @@ export class StockDataService {
   
     const requests = arr.map((symbol) =>
       this.http
-        .get<any>(`https://api.marketstack.com/v1/eod?access_key=4f7e5853443aa75d9fecf37e47d07727&symbols=${symbol}`)
+        .get<any>(`https://eodhd.com/api/real-time/${symbol}.US?api_token=67a12da01ba898.08534747&fmt=json`)
         .toPromise()
         .then((res) => {
-          if (res?.data?.[0]) {
-            const changeInPrice = res.data[0].open - res.data[0].close;
+          console.log(res, 'res')
+          if (res) {
+            const changeInPrice = res.open - res.close;
             console.log(`Change for ${symbol}:`, changeInPrice);
-            return changeInPrice;
+            return changeInPrice.toString();
           }
           return '0'; // Default if data is missing
         })
@@ -44,7 +45,7 @@ export class StockDataService {
 
   getPopularStocks() {
     const popularStocks = ['TSLA', 'AAPL', 'SPY', 'GOOG', 'AMZN', 'GME', 'MSFT'];
-    const stockNames = ['Tesla', 'Apple', 'S&P 500', 'Google', 'Amazon', 'Microsoft'];
+    const stockNames = ['Tesla', 'Apple', 'S&P 500', 'Google', 'Amazon', 'GameStop', 'Microsoft'];
   
     this.popularStocksData = []; // Reset before fetching new data
   
@@ -55,7 +56,9 @@ export class StockDataService {
         )
         .subscribe({
           next: (data) => {
+            console.log(data)
             if (data) {
+              
               let details: StockDetails = {
                 ticker: popularStocks[i],
                 company: stockNames[i] || popularStocks[i], // Fallback if undefined
@@ -65,7 +68,7 @@ export class StockDataService {
                 changePrice: data.d.toString(),
               };
               this.popularStocksData.push(details); // Update array
-              console.log(`Added: ${details.ticker}`, this.popularStocksData);
+              // console.log(`Added: ${details.ticker}`, this.popularStocksData);
 
             }
           },
