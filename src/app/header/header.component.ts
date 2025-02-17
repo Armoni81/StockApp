@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { StockDataService } from '../stockService/stock-data.service';
 import { StockDetails } from '../models/stock-details';
 import { OnInit } from '@angular/core';
