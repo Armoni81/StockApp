@@ -4,6 +4,7 @@ import { StockDataService } from '../stockService/stock-data.service';
 import { StockDetails } from '../models/stock-details';
 import { OnInit } from '@angular/core';
 import { filter } from 'rxjs';
+import { LocalStoageServiceService } from '../local-storage/local-stoage-service.service';
 
 // import * as bootstrap from 'bootstrap';
 
@@ -20,7 +21,7 @@ export class HeaderComponent implements OnInit {
   userInput: string = ''
   stockDetails:StockDetails[] | boolean | any = []
   displayStockCount:boolean = false
-  constructor( private stockService:StockDataService ){}
+  constructor( private stockService:StockDataService ,private local:LocalStoageServiceService){}
   ngOnInit(): any {
     this.stockDetails = this.stockService.getPopularStocks()
     
@@ -70,6 +71,18 @@ export class HeaderComponent implements OnInit {
 
 
  
+}
+bookmarkStocks(index: any){
+ console.log(index)
+ 
+ const storedData = localStorage.getItem('bookmarks')
+console.log(storedData, 'Sdata')
+ const data = storedData ? JSON.parse(storedData): []
+
+ console.log(data)
+ data.push(this.stockDetails[index])
+ this.local.setItem('bookmarks',JSON.stringify(data))
+
 }
 
 }

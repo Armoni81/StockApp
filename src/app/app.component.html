@@ -1,18 +1,9 @@
-<div style="background-color: rgb(248, 237, 231);">
+<div style="background-color: rgb(248, 237, 231);display: flex;">
   <!-- <h1>Header {{ title }}</h1> -->
-  
-  <app-header>
-    
-  </app-header>
+  <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <router-outlet/>
+
 </div>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-<router-outlet />
