@@ -2,7 +2,8 @@ export interface StockDetails {
     ticker: string,
     company: string,
     typeStock: string,
-    prevClose: number | string,
+    prevClose: number,
     lastCloseDate: string,
-    changePrice: any
+    changePrice: any,
+    bookmarked: string
 }
