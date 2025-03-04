@@ -1,46 +1,47 @@
-<div class="row">
-            <!-- Loop over stock details -->
-            <div *ngFor="let stock of bookMarks; index as i" class="col-12 col-sm-6 col-lg-4 mb-3">
-              <div class="card p-3" style="position: relative;">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between">
-                    <h5 class="card-title">{{ stock.ticker  + i}}
-                      <small style="font-size: 0.55em;" class="text-muted">Ticker</small>
-                    </h5>
-                    <h6 class="card-text">${{ stock.prevClose }}
-                      <small style="font-size: 0.55em;" class="text-muted">Close</small>
-                    </h6>
-                  </div>
-                  <small class="card-text text-body-secondary">{{ stock.company }}</small>
-                  <h6 class="card-text mt-3">{{ stock.lastCloseDate }}</h6>
-                 <div>
-                   <p *ngIf="stock.changePrice.includes('-')" class="text-danger" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
-                     ${{ stock.changePrice }}
-                     <i class="bi bi-arrow-down-circle-fill"></i>
-                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
-                       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
-                     </svg>
-                     <!-- <button type="button" class="btn btn-secondary" data-bs-toggle="popover" title="This data is from the previous trading day's close."  
-                     data-bs-content="This data is from the previous trading day's close."  
-                     style="width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; padding: 0; line-height: 1;position: relative;left: 30px;cursor: default; opacity: 0.33">
-                     ?
-                   </button> -->
-                   </p>
-                   <p *ngIf="!stock.changePrice.includes('-')" class="text-success" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
-                     ${{ stock.changePrice }}
-                     <i class="bi bi-arrow-down-circle-fill"></i>
-                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
-                       <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
-                     </svg>
-                    </p>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="popover" title="This data is from the previous trading day's close."  
-                    data-bs-content="This data is from the previous trading day's close." 
-                    style="width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; padding: 0; line-height: 1;position: relative;right: 27px;top: 78px;cursor: default; opacity: 0.33;">
-                    ?
-                  </button>
-                   <!-- <a href="#" class="btn btn-primary mt-3" style="position: relative;bottom: 15px; color: aqua;" (click)="bookmarkStocks(i)">Bookmark</a> -->
-                 </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+
+<div class="container">
+  <p style="position: relative; top: 44px; font-size: xx-large; color: #007bff;">Bookmarks</p>
+
+
+<div class="row" style="margin-top: 100px;">
+  <!-- Loop over stock details -->
+  <div *ngFor="let stock of bookMarks; index as i" class="col-12 col-sm-6 col-lg-4 mb-3" style=" min-width: 300px; padding: 18px;">
+    <div class="card p-3" style="position: relative; box-shadow: 0px 0px 7px 1px #6471ee;border-radius: 22px; background-color: #282c30;">
+      <div class="card-body" style="min-height: 153px;">
+        <div class="d-flex justify-content-between">
+          <h5 class="card-title" style="font-weight: bolder;font-size: 25px; color: #ffff;">{{ stock.ticker }}
+            <small style="font-size: 0.55em;font-weight: lighter; color: #aba5a5 !important;" class="text-muted">Ticker</small>
+          </h5>
+          <h6 class="card-text" style="color: #007bff;">${{ stock.prevClose }}
+            <small style="font-size: 0.55em;color: #aba5a5 !important;" class="text-muted">Close</small>
+          </h6>
+        </div>
+        <small class="card-text text-body-secondary" style="font-size: 0.85em; color: #aba5a5 !important;">{{ stock.company }}</small>
+       <div>
+         <p *ngIf="stock.changePrice.includes('-')" class="text-danger" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
+           ${{ stock.changePrice }}
+           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+           </svg>
+         </p>
+         <p *ngIf="!stock.changePrice.includes('-')" class="text-success" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
+           ${{ stock.changePrice }}
+           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+             <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+           </svg>
+          </p>
+          <button type="button" class="btn btn-secondary" data-bs-toggle="popover" title="This data is from the previous trading day's close."  
+          data-bs-content="This data is from the previous trading day's close." 
+          style="width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; padding: 0; line-height: 1;position: relative;right: 27px;top: 25px;cursor: default; opacity: 0.33;">
+          ?
+        </button>
+        <button (click)="removeBookMark(i)">
+          remove
+        </button>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

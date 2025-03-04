@@ -1,72 +1,67 @@
-<div class="container-fluid">
-    <!-- Row for sidebar and content -->
-    <div class="row">
-      <div class="col p-4">
-        <!-- Header (e.g., Stock Exchange App title and other content) -->
-        <!-- Content -->
-        <div>
-          <h1 class="mb-3">Stock Exchange App</h1>
-          
-          <div class="mb-3 form-floating d-flex">
-            <!-- Input for stock -->
-            <input [(ngModel)]="userInput" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-radius: 30px;">
-            <label for="floatingInput">Stock</label>
-            <button class="btn btn-outline-secondary ms-2" type="button" (click)="test()">Submit</button>
-          </div>
-          
-          <p>You entered: {{ userInput }}</p>
-          <!-- <p *ngIf="userInput.length === 0">hi</p> -->
-          <h3 *ngIf="!displayStockCount">Popular Stocks</h3>
-          <h3 *ngIf="displayStockCount">Search Results ({{ stockDetails.length }})</h3>
-          
-          <div class="row">
-            <!-- Loop over stock details -->
-            <div *ngFor="let stock of stockDetails; index as i" class="col-12 col-sm-6 col-lg-4 mb-3">
-              <div class="card p-3" style="position: relative; box-shadow: 0px 2px 10px 1px;border-radius: 22px;">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between">
-                    <h5 class="card-title" style="font-weight: bolder;font-size: 25px;">{{ stock.ticker }}
-                      <small style="font-size: 0.55em;font-weight: lighter;" class="text-muted">Ticker</small>
-                    </h5>
-                    <h6 class="card-text">${{ stock.prevClose }}
-                      <small style="font-size: 0.55em;" class="text-muted">Close</small>
-                    </h6>
-                  </div>
-                  <small class="card-text text-body-secondary" style="font-size: 0.85m;">{{ stock.company }}</small>
-                  <!-- <small style="font-size: 0.55em;" class="text-muted"> Company</small> -->
-                  <!-- <h6 class="card-text mt-3">{{ stock.lastCloseDate }}</h6> -->
-                 <div>
-                   <p *ngIf="stock.changePrice.includes('-')" class="text-danger" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
-                     ${{ stock.changePrice }}
-                
-                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
-                       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
-                     </svg>
-                     <!-- <button type="button" class="btn btn-secondary" data-bs-toggle="popover" title="This data is from the previous trading day's close."  
-                     data-bs-content="This data is from the previous trading day's close."  
-                     style="width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; padding: 0; line-height: 1;position: relative;left: 30px;cursor: default; opacity: 0.33">
-                     ?
-                   </button> -->
-                   </p>
-                   <p *ngIf="!stock.changePrice.includes('-')" class="text-success" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
-                     ${{ stock.changePrice }}
-                
-                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
-                       <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
-                     </svg>
-                    </p>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="popover" title="This data is from the previous trading day's close."  
-                    data-bs-content="This data is from the previous trading day's close." 
-                    style="width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; padding: 0; line-height: 1;position: relative;right: 27px;top: 78px;cursor: default; opacity: 0.33;">
-                    ?
-                  </button>
-                   <a  class="btn btn-primary mt-3 " [attr.id]="stock.ticker" style="position: relative;bottom: 15px; color: rgb(242, 247, 247);border-radius: 20px;display: flex; justify-content: center; background-color: rgb(248, 237, 231); color: black;" (click)="bookmarkStocks(stock.ticker, i)">Bookmark</a>
-                 </div>
-                </div>
+ <!-- Row for sidebar and content -->
+  <div class="container-fluid">
+
+ <div class="row">
+  <div class="col p-4">
+    <!-- Header (e.g., Stock Exchange App title and other content) -->
+    <!-- Content -->
+    <div>
+      <h1 class="mb-3" style="color: #007bff; padding: 13px; width: auto; background-color: #282c30;  border-radius: 20px;">Stripe Foro</h1>
+      
+      <div class="mb-3 form-floating d-flex" style="align-items: center; gap: 8px;">
+        <!-- Input for stock -->
+        <input [(ngModel)]="userInput" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-radius: 30px; border: 2px solid #6471ee;">
+        <label for="floatingInput">Stock</label>
+        <button class="btn btn-outline-secondary ms-2" type="button" (click)="test()">Submit</button>
+      </div>
+      
+      <p>You entered: {{ userInput }}</p>
+      <h3 *ngIf="!displayStockCount" style="color:#007bff;">Popular Stocks</h3>
+      <h3 *ngIf="displayStockCount">Search Results ({{ stockDetails.length }})</h3>
+      
+      <div class="row">
+        <!-- Loop over stock details -->
+        <div *ngFor="let stock of stockDetails; index as i" class="col-12 col-sm-6 col-lg-4 mb-3">
+          <div class="card p-3" style="position: relative; box-shadow: 0px 0px 7px 1px #6471ee;border-radius: 22px; background-color: #282c30;">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="card-title" style="font-weight: bolder;font-size: 25px; color: #ffff;">{{ stock.ticker }}
+                  <small style="font-size: 0.55em;font-weight: lighter; color: #aba5a5 !important;" class="text-muted">Ticker</small>
+                </h5>
+                <h6 class="card-text" style="color: #007bff;">${{ stock.prevClose }}
+                  <small style="font-size: 0.55em;color: #aba5a5 !important;" class="text-muted">Close</small>
+                </h6>
               </div>
+              <small class="card-text text-body-secondary" style="font-size: 0.85em; color: #aba5a5 !important;">{{ stock.company }}</small>
+             <div>
+               <p *ngIf="stock.changePrice.includes('-')" class="text-danger" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
+                 ${{ stock.changePrice }}
+                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                 </svg>
+               </p>
+               <p *ngIf="!stock.changePrice.includes('-')" class="text-success" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
+                 ${{ stock.changePrice }}
+                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                   <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+                 </svg>
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="popover" title="This data is from the previous trading day's close."  
+                data-bs-content="This data is from the previous trading day's close." 
+                style="width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; padding: 0; line-height: 1;position: relative;right: 27px;top: 78px;cursor: default; opacity: 0.33;">
+                ?
+              </button>
+               <a class="btn btn-warning mt-3" [attr.id]="stock.ticker" style="position: relative; bottom: 15px; border-radius: 20px;
+                      display: flex; justify-content: center; background-color: #ffcc00; color: black;"
+                  (click)="bookmarkStocks(stock.ticker, i)">
+                  Bookmark
+               </a>
+             </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+</div>

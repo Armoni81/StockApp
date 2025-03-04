@@ -4,12 +4,13 @@ import { StockDetails } from '../models/stock-details';
 import { firstValueFrom } from 'rxjs'; //use this instead of toPromise() as it is now depricated
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators'
+import { LocalStoageServiceService } from '../local-storage/local-stoage-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class StockDataService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient ,private local:LocalStoageServiceService) { }
   popularStocksData: StockDetails[] = []
 
 //67908244556db6.70380137
@@ -104,5 +105,11 @@ export class StockDataService {
         }
       }
     }
+  }
+
+  removeStockFromBookMarks(index: number){
+   const grabLocalStorage = this.local.getItem('bookmarks')
+   console.log(grabLocalStorage, 'here')
+
   }
 }

@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   test() {
     this.displayStockCount = true;
+    
     // console.log(this.stockService.getstockData())
     console.log('hi click');
     console.log(this.userInput, 'input');
@@ -82,6 +83,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         };
         this.stockDetails.push(details);
       });
+      this.userInput = ''
     setTimeout(() => {
       this.stockService.updateBookMarkedStocks();
     }, 800);
