@@ -36,4 +36,9 @@ bookMarks: StockDetails[] =[]
    this.cdfRef.detectChanges();
   
   }
+  removeAllStocks(){
+
+
+    localStorage.removeItem('bookmarks')
+  }
 }

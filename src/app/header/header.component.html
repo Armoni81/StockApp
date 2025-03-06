@@ -1,18 +1,18 @@
  <!-- Row for sidebar and content -->
   <div class="container-fluid">
 
- <div class="row">
-  <div class="col p-4">
+ <div class="row" style="padding: 20px;">
+
     <!-- Header (e.g., Stock Exchange App title and other content) -->
     <!-- Content -->
-    <div>
+
       <h1 class="mb-3" style="color: #007bff; padding: 13px; width: auto; background-color: #282c30;  border-radius: 20px;">Stripe Foro</h1>
       
-      <div class="mb-3 form-floating d-flex" style="align-items: center; gap: 8px;">
+      <div class="mb-3 form-floating d-flex" style="align-items: center; gap: 8px;padding-left: 0px;">
         <!-- Input for stock -->
         <input [(ngModel)]="userInput" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-radius: 30px; border: 2px solid #6471ee;">
         <label for="floatingInput">Stock</label>
-        <button class="btn btn-outline-secondary ms-2" type="button" (click)="test()">Submit</button>
+        <button class="btn btn-outline-secondary ms-2" type="button" (click)="test()" style="color: white;  background-color: #6471ee;">Submit</button>
       </div>
       
       <p>You entered: {{ userInput }}</p>
@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
+
 </div>
 </div>
