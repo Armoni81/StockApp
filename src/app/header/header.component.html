@@ -1,34 +1,37 @@
- <!-- Row for sidebar and content -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
   <div class="container-fluid">
+    <div  *ngIf="isSpinnerVisible" class="d-flex justify-content-center align-items-center" style="position: absolute; top: 50%; left: 63%; transform: translate(-50%, -50%);">
+      <div class="spinner-border" role="status" style="color: greenyellow;">
+        <!-- <span class="" style="color: white;">SF</span> -->
+      </div>
+    </div>
 
  <div class="row" style="padding: 20px;">
-
-    <!-- Header (e.g., Stock Exchange App title and other content) -->
-    <!-- Content -->
-
-      <h1 class="mb-3" style="color: #007bff; padding: 13px; width: auto; background-color: #282c30;  border-radius: 20px;">Stripe Foro</h1>
-      
+      <h1 class="mb-3" style="color: #007bff; padding: 13px; width: auto; background-color: #282c30;  border-radius: 20px; font-family: Space Grotesk;">Stripe Foro</h1>
       <div class="mb-3 form-floating d-flex" style="align-items: center; gap: 8px;padding-left: 0px;">
         <!-- Input for stock -->
         <input [(ngModel)]="userInput" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-radius: 30px; border: 2px solid #6471ee;">
         <label for="floatingInput">Stock</label>
-        <button class="btn btn-outline-secondary ms-2" type="button" (click)="test()" style="color: white;  background-color: #6471ee;">Submit</button>
+        <button  id = "submitBtn" class="btn btn-outline-secondary ms-2" [disabled]="userInput.length === 0"  type="button" (click)="test()" style="color: white;  background-color: #6471ee; font-family: Space Grotesk; margin-right: 10px;">Submit</button>
       </div>
       
       <p>You entered: {{ userInput }}</p>
-      <h3 *ngIf="!displayStockCount" style="color:#007bff;">Popular Stocks</h3>
+      <h3 *ngIf="!displayStockCount" style="color:#007bff ; font-family: Space Grotesk;">Popular Stocks</h3>
       <h3 *ngIf="displayStockCount">Search Results ({{ stockDetails.length }})</h3>
       
-      <div class="row">
+      <div class="row" >
         <!-- Loop over stock details -->
-        <div *ngFor="let stock of stockDetails; index as i" class="col-12 col-sm-6 col-lg-4 mb-3">
+        <div *ngFor="let stock of stockDetails; index as i" class="col-12 col-sm-6 col-lg-4 mb-3" >
           <div class="card p-3" style="position: relative; box-shadow: 0px 0px 7px 1px #6471ee;border-radius: 22px; background-color: #282c30;">
             <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title" style="font-weight: bolder;font-size: 25px; color: #ffff;">{{ stock.ticker }}
+              <div class="d-flex justify-content-between" style="gap: 80px;">
+                <h5 class="card-title" style="font-weight: bolder;font-size: 25px; color: #ffff; font-family: Space Grotesk;">{{ stock.ticker }}
                   <small style="font-size: 0.55em;font-weight: lighter; color: #aba5a5 !important;" class="text-muted">Ticker</small>
                 </h5>
-                <h6 class="card-text" style="color: #007bff;">${{ stock.prevClose }}
+                <h6 class="card-text" style="color: #007bff; font-family: Space Grotesk;">${{ stock.prevClose }}
                   <small style="font-size: 0.55em;color: #aba5a5 !important;" class="text-muted">Close</small>
                 </h6>
               </div>
@@ -40,7 +43,7 @@
                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
                  </svg>
                </p>
-               <p *ngIf="!stock.changePrice.includes('-')" class="text-success" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;">
+               <p *ngIf="!stock.changePrice.includes('-')" class="text-success" style="position: absolute; right: 10px; bottom:-7px; font-size: 18px;font-family: Space Grotesk;">
                  ${{ stock.changePrice }}
                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
                    <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
@@ -52,7 +55,7 @@
                 ?
               </button>
                <a class="btn btn-warning mt-3" [attr.id]="stock.ticker" style="position: relative; bottom: 15px; border-radius: 20px;
-                      display: flex; justify-content: center; background-color: #ffcc00; color: black;"
+                      display: flex; justify-content: center; background-color: #ffcc00; color: black; font-family: Space Grotesk;"
                   (click)="bookmarkStocks(stock.ticker, i)">
                   Bookmark
                </a>
@@ -61,7 +64,8 @@
           </div>
         </div>
       </div>
-
-
 </div>
 </div>
+
+
+1163a6b4-83c2-4928-ba6d-c6f419326399

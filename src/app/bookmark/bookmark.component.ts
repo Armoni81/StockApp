@@ -14,14 +14,22 @@ import { ChangeDetectorRef } from '@angular/core';
 export class BookmarkComponent implements OnInit {
 data:any =[]
 bookMarks: StockDetails[] =[]
+isVisible: boolean = false
+displayNoBookmarks: boolean = false
+displayBookmarks: boolean = false
   constructor(private local:LocalStoageServiceService, private stockService:StockDataService, private cdfRef:ChangeDetectorRef){}
   ngOnInit(): void {
     this.data = JSON.parse(localStorage.getItem('bookmarks')|| '[]')
     //  bookmarkStocks: StockDetails[] | boolean | any = JSON.parse(localStorage.getItem('bookmarks'))
-  console.log(this.data)
-  console.log(this.data.flat(), 'flat')
+
   this.bookMarks = this.data
- 
+  this.isVisible =  true
+
+  setTimeout(() => {
+    this.isVisible = false
+    this.displayNoBookmarks  = true
+    this.displayBookmarks = true
+  },1000 )
   // console.log(this.bookMarks, 'booekem')
     
   }
@@ -32,13 +40,15 @@ bookMarks: StockDetails[] =[]
       parse.splice(index, 1)
     }
     console.log(parse)
+    this.bookMarks = parse
    localStorage.setItem('bookmarks',  JSON.stringify(parse))
-   this.cdfRef.detectChanges();
+   
   
   }
   removeAllStocks(){
 
-
     localStorage.removeItem('bookmarks')
+    this.bookMarks = []
   }
+
 }
