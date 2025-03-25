@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   stockDetails: StockDetails[] | boolean | any = [];
   displayStockCount: boolean = false;
   isSpinnerVisible: boolean = false
+  displayNoSearchRsults: boolean = false
 
 
   constructor(
@@ -35,8 +36,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   test() {
+    this.displayNoSearchRsults = false
     this.isSpinnerVisible = true
-   
     this.stockDetails = []
 
     setTimeout(() =>  {
@@ -47,6 +48,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
           const filterResponse = data.filter(
             (obj: { Exchange: string }) => obj.Exchange === 'US'
           );
+          if(filterResponse.length <= 0 ){
+            console.log('try again')
+            this.displayNoSearchRsults = true
+          }
           this.stockDetails = [];
           const getTickersForVolAndChange = filterResponse.map(
             (val: { Code: string }) => val.Code
@@ -54,7 +59,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
           const changePrice = await this.stockService.getVolAndChangeData(
             getTickersForVolAndChange
           );
-          console.log(typeof changePrice[0], 'yo');
+          
           if (filterResponse.length >= 1) {
             for (let i = 0; i <= filterResponse.length; i++) {
               let toNum = parseFloat(changePrice[i]).toFixed(2);
@@ -73,6 +78,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   
               this.stockDetails.push(details);
             }
+
           }
   
           let details: StockDetails = {
@@ -85,13 +91,16 @@ export class HeaderComponent implements OnInit, AfterViewInit {
             bookmarked: '',
           };
           this.stockDetails.push(details);
+         
         });
         this.userInput = ''
+ 
        
       setTimeout(() => {
         this.stockService.updateBookMarkedStocks();
       }, 800);
       this.isSpinnerVisible = false
+      console.log(this.stockDetails, 'Armoni here yo')
     
     }, 1300)
     

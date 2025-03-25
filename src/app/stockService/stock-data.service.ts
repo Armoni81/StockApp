@@ -21,14 +21,14 @@ export class StockDataService {
   // https://api.polygon.io/v3/reference/tickers/AAPL?apiKey=zQvZsoJrKnEYXvd2Fj2O1zdOUp8ZuC1B
   }
   getVolAndChangeData(arr: string[]): Promise<(any)[]> {
-    console.log('Fetching stock data for:', arr);
+
   
     const requests = arr.map((symbol) =>
       this.http
         .get<any>(`https://eodhd.com/api/real-time/${symbol}.US?api_token= 67c2307a557bb1.95541284&fmt=json`)
         .toPromise()
         .then((res) => {
-          console.log(res, 'res')
+          
           if (res) {
             const changeInPrice = res.open - res.close;
             console.log(`Change for ${symbol}:`, changeInPrice);
@@ -60,9 +60,9 @@ export class StockDataService {
         )
         .subscribe({
           next: (data) => {
-            console.log(data)
+        
             if (data) {
-              console.log(popularStocks[i], 'the stock being added')
+              // console.log(popularStocks[i], 'the stock being added')
               let details: StockDetails = {
                 ticker: popularStocks[i],
                 company: stockNames[i] || popularStocks[i], 
@@ -88,9 +88,8 @@ export class StockDataService {
 
     const data = storedData ? JSON.parse(storedData) : [];
 
-    console.log(data, 'here is data');
-    // const obj = data.filter((stock: { bookmarked: string; }) => stock.bookmarked === 'none')
-    // console.log(obj)
+
+    
     if (data) {
       for (let stock of data) {
         let el = document.getElementById(stock.ticker);
