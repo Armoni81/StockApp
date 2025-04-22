@@ -10,6 +10,7 @@
   <div *ngIf="bookMarks.length ===  0 && displayNoBookmarks === true" style="position: absolute; top: 50%; left: 63%; transform: translate(-50%, -50%); color: white;">
     <h1> You currently dont have any  stocks bookmarked...</h1>
   </div>
+  <button *ngIf="bookMarks.length > 1" (click) = "removeAllStocks()" class="btn btn-danger" style="position: relative; top:50px"> Clear Bookmarks </button>
 
 <div class="row" style="margin-top: 100px;" *ngIf="bookMarks.length > 0  && displayBookmarks === true">
   <!-- <button (click)="removeAllStocks()"  style="color: red;">Remove all</button> -->

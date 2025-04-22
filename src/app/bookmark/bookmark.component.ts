@@ -46,9 +46,9 @@ displayBookmarks: boolean = false
   
   }
   removeAllStocks(){
-
-    localStorage.removeItem('bookmarks')
     this.bookMarks = []
+    localStorage.setItem('bookmarks',  JSON.stringify([]))
+    console.log('clickeddd')
   }
 
 }
