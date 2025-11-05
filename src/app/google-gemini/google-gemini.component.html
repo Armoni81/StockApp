@@ -1,0 +1,19 @@
+<!-- Large input box -->
+<div style="color: yellow;">
+	<p (click)="renderAiBox()" style="cursor: pointer; color: yellow;">Use Ai to supplement your search?</p>
+</div>
+<div style="padding-bottom:80px;" *ngIf="isAiBoxVisible" >
+
+	<div class="row" style="padding: 20px;">
+
+		<div class="mb-3 form-floating d-flex" style="align-items: center; gap: 8px;padding-left: 0px;">
+		  <!-- Input for stock -->
+		  <input [(ngModel)]="inputValue" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-radius: 30px; border: 2px solid #6471ee; width: 73vw;">
+		  <label for="floatingInput">Stock</label>
+		  <button  id = "submitBtn" class="btn btn-outline-secondary ms-2" [disabled] = "inputValue.length === 0"  type="button"  (click)="logText()" style="color: white;  background-color: #6471ee; font-family: Space Grotesk; margin-right: 10px;">Submit</button>
+		</div>
+		<p style="color: yellow; white-space: pre-wrap;">{{generatedAiText}}</p>
+  	</div>  
+   
+</div>
+  

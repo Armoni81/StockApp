@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   test() {
+    console.log(this.userInput, 'useinput')
     this.displayNoSearchRsults = false
     this.isSpinnerVisible = true
     this.stockDetails = []
