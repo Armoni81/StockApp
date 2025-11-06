@@ -32,7 +32,7 @@ app.post("/api/chat", async (req,res) => {
 			return res.status(400).json({error:'Promt required'})
 		}
 
-		const model = ai.getGenerativeModel({model:"gemini-2.5-flash", systemInstruction: "You are to give historical information on the stock provided. Be clear and consise"})
+		const model = ai.getGenerativeModel({model:"gemini-2.5-flash", systemInstruction: "You are to give historical information on the stock provided. Be clear and consise. No more than 800 characters. At the end of your response please add insert another stock to continue learning 😊"})
 		const result = await model.generateContent(prompt);
 		const response = await result.response;
 		const text = response.text();

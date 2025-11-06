@@ -25,13 +25,12 @@ export class GoogleGeminiComponent {
 
   
     this.prompt = {
-      text:this.inputValue
+      text:`Please give a historical overview of this stock${this.inputValue}`
     }
 
     this.postData(this.prompt).subscribe(
       (response) => {
-        // What do you do with the response here?
-        this.generatedAiText = response.generatedAiText
+        this.generatedAiText = response.generatedText
         console.log(this.generatedAiText, 'lol')
       }
     );
