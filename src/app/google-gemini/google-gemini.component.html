@@ -1,19 +1,37 @@
 <!-- Large input box -->
-<div style="color: yellow;">
-	<p (click)="renderAiBox()" style="cursor: pointer; color: yellow;">Use Ai to supplement your search?</p>
+<div style="color: yellow; display: flex;padding: 10px;justify-content: space-between;">
+	<p (click)="renderAiBox()" class="ai-glow-text" style="cursor: pointer; color: yellow;">
+		Use Ai to supplement your search?
+	</p>
+	<button *ngIf="isAiBoxVisible" aria-label="Close" (click)="closeAiBox()" style="border-radius: 100px; opacity: 50%;">&times;</button>
 </div>
 <div style="padding-bottom:80px;" *ngIf="isAiBoxVisible" >
 
 	<div class="row" style="padding: 20px;">
 
-		<div class="mb-3 form-floating d-flex" style="align-items: center; gap: 8px;padding-left: 0px;">
-		  <!-- Input for stock -->
-		  <input [(ngModel)]="inputValue" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-radius: 30px; border: 2px solid #6471ee; width: 73vw;">
-		  <label for="floatingInput">Stock</label>
-		  <button  id = "submitBtn" class="btn btn-outline-secondary ms-2" [disabled] = "inputValue.length === 0"  type="button"  (click)="logText()" style="color: white;  background-color: #6471ee; font-family: Space Grotesk; margin-right: 10px;">Submit</button>
+		<div class="mb-3 d-flex" style="align-items: center; gap: 8px;padding-left: 0px; justify-content: center;">
+		  <!-- Wrapper for rainbow effect -->
+		  <div [ngClass]="displayColorOnInputBox ? 'rainbow-spinner' : '' "  style="flex: 1;">
+			<input [(ngModel)]="inputValue" type="email" class="form-control modern-input" id="floatingInput" placeholder="Stock" style="border-radius: 30px; border: none; width: 100%; position: relative; z-index: 1;">
+		  </div>
+		  <button id="submitBtn" class="submit-button" [disabled]="inputValue.length === 0" type="button" (click)="logText()">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+			  <path d="M12 19V5M5 12l7-7 7 7"/>
+			</svg>
+		  </button>
 		</div>
-		<p style="color: yellow; white-space: pre-wrap;">{{generatedAiText}}</p>
-  	</div>  
-   
+		
+		<!-- Loading dots -->
+		<div *ngIf="displayColorOnInputBox" class="loading-dots">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+
+		<!-- AI Response -->
+		<div *ngIf="generatedAiText.length > 0" class="ai-response-typing">
+			<p style="white-space: pre-wrap; margin: 0;">{{generatedAiText}}</p>
+		</div>
+	</div>  
+	
 </div>
-  
