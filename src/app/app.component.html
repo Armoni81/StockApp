@@ -4,7 +4,7 @@
     <app-sidebar></app-sidebar>
   </div>
   <div style="display: flex; flex-direction: column;">
-    <app-google-gemini></app-google-gemini>
+    <app-google-gemini *ngIf="router.url !== '/bookmarks' "></app-google-gemini>
     <router-outlet/>
   </div>
 </div>
