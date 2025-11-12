@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class GoogleGeminiComponent {
   inputValue: string = ''
-  apiUrl: string = 'http://localhost:3000/api/chat'
+  apiUrl: string = 'https://stock-app-pi-murex.vercel.app/api/chat'
   prompt:Object = {}
   isAiBoxVisible:boolean = false
   generatedAiText:string = ''
