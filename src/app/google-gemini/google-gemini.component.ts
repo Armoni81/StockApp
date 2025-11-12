@@ -45,6 +45,4 @@ export class GoogleGeminiComponent {
     console.log('in')
     return this.http.post<any>(this.apiUrl, data);
   }
-
-  // console.log(postData(this.prompt))
 }

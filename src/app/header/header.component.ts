@@ -6,9 +6,6 @@ import { OnInit } from '@angular/core';
 import { filter } from 'rxjs';
 import { LocalStoageServiceService } from '../local-storage/local-stoage-service.service';
 
-// import * as bootstrap from 'bootstrap';
-
-declare var bootstrap: any;
 @Component({
   selector: 'app-header',
   standalone: false,

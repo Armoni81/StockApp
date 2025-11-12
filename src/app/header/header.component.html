@@ -3,16 +3,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
   <div class="container-fluid">
-    <div  *ngIf="isSpinnerVisible" class="d-flex justify-content-center align-items-center" style="position: absolute; top: 50%; left: 63%; transform: translate(-50%, -50%);">
+    <div  *ngIf="isSpinnerVisible" class="d-flex justify-content-center align-items-center" style="position: absolute; top: 70%; left: 63%; transform: translate(-50%, -50%);">
       <div class="spinner-border" role="status" style="color: greenyellow;">
-        <!-- <span class="" style="color: white;">SF</span> -->
+       
       </div>
     </div>
 
  <div class="row" style="padding: 20px;">
       <h1 class="mb-3" style="color: #007bff; padding: 13px; width: auto; background-color: #282c30;  border-radius: 20px; font-family: Space Grotesk;">Stripe Foro</h1>
       <div class="mb-3 form-floating d-flex" style="align-items: center; gap: 8px;padding-left: 0px;">
-        <!-- Input for stock -->
+  
         <input [(ngModel)]="userInput" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-radius: 30px; border: 2px solid #6471ee; width: 73vw;">
         <label for="floatingInput">Stock</label>
         <button  id = "submitBtn" class="btn btn-outline-secondary ms-2" [disabled]="userInput.length === 0"  type="button" (click)="test()" style="color: white;  background-color: #6471ee; font-family: Space Grotesk; margin-right: 10px;">Submit</button>
@@ -23,7 +23,6 @@
       <h3 *ngIf="displayStockCount" style="color: #007bff;">Search Results ({{ stockDetails.length }})</h3>
       
       <div class="row" >
-        <!-- Loop over stock details -->
         <div *ngIf="displayNoSearchRsults">
          <p style="color: white;">Please try your search again. Stock could not be found. </p>
         </div>
