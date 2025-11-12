@@ -46,8 +46,12 @@ app.post("/api/chat", async (req,res) => {
 		res.json({ generatedText: text });
 		
 	} catch(err)  {
-		console.error('Error calling Gemini API:',err);
-		res.status(500).json({ err: 'Failed to generate content.' });
+		console.error('Error calling Gemini API:MONII', err);
+		console.error('Error details:', err.message, err.stack);
+		res.status(500).json({ 
+			error: 'Failed to generate content.',
+			details: err.message  // Add this to see error in Postman
+		});
 	}
 })
 
