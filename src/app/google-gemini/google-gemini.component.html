@@ -1,0 +1,39 @@
+
+<div style="color: yellow; display: flex;padding: 10px;justify-content: space-between;">
+	<p (click)="renderAiBox()" class="ai-glow-text" style="cursor: pointer; color: yellow;">
+		Use Ai to supplement your search?
+	</p>
+	<button 
+  *ngIf="isAiBoxVisible" 
+  aria-label="Close" 
+  (click)="closeAiBox()" 
+  class="stylish-close-btn">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+    <path d="M18 6L6 18M6 6l12 12"/>
+  </svg>
+</button>
+</div>
+<div style="max-width: 750px; margin: 0 auto;" *ngIf="isAiBoxVisible" >
+	<div class="row" style="padding: 20px;">
+		<div class="mb-3 d-flex" style="align-items: center; gap: 8px;padding-left: 0px; justify-content: center;">
+
+		  <div [ngClass]="displayColorOnInputBox ? 'rainbow-spinner' : '' "  style="flex: 1;">
+			<input [(ngModel)]="inputValue" type="email" class="form-control modern-input" id="floatingInput" placeholder="Stock" style="border-radius: 30px; border: none; width: 100%; position: relative; z-index: 1;">
+		  </div>
+		  <button id="submitBtn" class="submit-button" [disabled]="inputValue.length === 0" type="button" (click)="logText()">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+			  <path d="M12 19V5M5 12l7-7 7 7"/>
+			</svg>
+		  </button>
+		</div>
+		<div *ngIf="displayColorOnInputBox" class="loading-dots">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div *ngIf="generatedAiText.length > 0" class="ai-response-typing">
+			<p style="white-space: pre-wrap; margin: 0;">{{generatedAiText}}</p>
+		</div>
+	</div>  
+	
+</div>

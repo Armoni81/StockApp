@@ -10,13 +10,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BookmarkComponent } from './bookmark/bookmark.component';
+import { GoogleGeminiComponent } from './google-gemini/google-gemini.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SidebarComponent,
-    BookmarkComponent
+    BookmarkComponent,
+    GoogleGeminiComponent
   ],
   imports: [
     BrowserModule,
