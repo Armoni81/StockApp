@@ -1,18 +1,20 @@
 const express = require('express')
 const cors = require('cors');
 const gemini = require('@google/generative-ai');
+const rateLimit = require('express-rate-limit');
 const z = gemini.GoogleGenerativeAI
 require('dotenv').config()
 const ai = new z(process.env.GEMINI_API_KEY)
-
 const app = express();
 app.use(express.json())
 app.use(cors())
-
-// Remove the app.listen for Vercel (only for local dev)
 const PORT = process.env.PORT || 3000
 
-// Only listen in development
+const limiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 10, // limit to 10 requests per minute (within Gemini's 15 RPM)
+    message: { error: 'Too many requests, please try again later.' }
+});
 if (process.env.NODE_ENV !== 'production') {
 	app.listen(PORT, (error) => {
 		if(!error){
@@ -28,7 +30,7 @@ app.get("/", (req,res) => {
 	res.send("Welcome to the root of the app")
 })
 
-app.post("/api/chat", async (req,res) => {
+app.post("/api/chat",limiter, async (req,res) => {
 	const prompt = req.body.text
 	try {
 		if(!prompt){
@@ -36,7 +38,7 @@ app.post("/api/chat", async (req,res) => {
 		}
 
 		const model = ai.getGenerativeModel({
-			model:"gemini-2.0-flash-exp", 
+			model:"gemini-2.0-flash-lite", 
 			systemInstruction: "You are to give historical information on the stock provided. Be clear and consise. No more than 800 characters. If anything other than Stock related stuff is entered please let them know you are here to answer Stock Information. If Armoni or Armoni Tigner is inserted give me many compliments on how hes such a great developer and dont include anything about stocks."
 		})
 		const result = await model.generateContent(prompt);
