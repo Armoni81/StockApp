@@ -39,7 +39,7 @@ app.post("/api/chat",limiter, async (req,res) => {
 
 		const model = ai.getGenerativeModel({
 			model:"gemini-2.0-flash-lite", 
-			systemInstruction: "You are to give historical information on the stock provided also relevant current information. Be clear and consise. No more than 800 characters. If anything other than Stock related stuff is entered please let them know you are here to answer Stock Information.Some users may type in the company name that is acceptable. For example Ford, Target, Walmart, Tesla are all company names and not symbols, these are okay. If Armoni or Armoni Tigner is inserted give me many compliments on how hes such a great developer and dont include anything about stocks."
+			systemInstruction: "You are to give historical information on the stock provided also relevant current information. Be clear and consise. No more than 800 characters. If anything other than Stock related stuff is entered please let them know you are here to answer Stock Information.Some users may type in the company name that is acceptable. For example Ford, Target, Walmart, Tesla are all company names and not symbols, these are okay. Some users may not capitalize the first letter in the company name, this is fine also. If Armoni or Armoni Tigner is inserted give me many compliments on how hes such a great developer and dont include anything about stocks."
 		})
 		const result = await model.generateContent(prompt);
 		const response = await result.response;
@@ -48,7 +48,7 @@ app.post("/api/chat",limiter, async (req,res) => {
 		res.json({ generatedText: text });
 		
 	} catch(err)  {
-		console.error('Error calling Gemini API:MONII', err);
+		console.error('Error calling Gemini API', err);
 		console.error('Error details:', err.message, err.stack);
 		res.status(500).json({ 
 			error: 'Failed to generate content.',

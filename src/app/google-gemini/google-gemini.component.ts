@@ -18,31 +18,28 @@ export class GoogleGeminiComponent {
   constructor(private http:HttpClient){}
   renderAiBox() {
     this.isAiBoxVisible = true
-    console.log('clicked')
-    console.log(this.isAiBoxVisible)
   }
   closeAiBox() {
     this.isAiBoxVisible = false
   }
 
   logText() {
-    console.log(this.inputValue, 'here')
+    const upperCaseFirstCharInInputValue = this.inputValue.split('')[0].toUpperCase() + this.inputValue.slice(1,this.inputValue.length )
     this.prompt = {
-      text:`Please give a historical overview of this stock${this.inputValue}`
+      text:`Please give a historical and current overview of this stock more detail about current status ${upperCaseFirstCharInInputValue}`
     }
     this.displayColorOnInputBox = true
     this.postData(this.prompt).subscribe(
       (response) => {
         this.generatedAiText = response.generatedText
         this.displayColorOnInputBox = false
-        console.log(this.generatedAiText, 'lol')
+  
       }
     );
 
   }
 
   postData(data: any): Observable<any> {
-    console.log('in')
     return this.http.post<any>(this.apiUrl, data);
   }
 }
